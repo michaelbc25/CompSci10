@@ -1,0 +1,105 @@
+import random
+board = [[" 1 ", " 2 ", " 3 "],
+         [" 4 ", " 5 ", " 6 "],
+         [" 7 ", " 8 ", " 9 "]]
+positin = 10
+players = 2
+turn = 0
+full = []
+def print_board():
+    row = 3
+    column = 3
+    rowCount = 0
+    
+    while(rowCount < row):
+        columnCount = 0
+        while(columnCount < column):
+            print(board[rowCount][columnCount],end = "|")
+            columnCount += 1
+        
+        print(" ")
+        print("------------")
+        rowCount += 1
+
+def make_move():
+    global position
+    global players
+    global turn
+    global row
+    global column
+    valid_move = False
+    position = 500
+    while (valid_move == False):
+        if (players == 2):
+            position = int(input("Whats your Move?"))
+        elif (players == 1 and (turn % 2) == 1):
+            position = int(input("Whats your Move?"))
+        else:
+            position = random.randint(1, 9)
+        if not(position < 0 or position > 9 or position in full):
+            valid_move = True
+        else:
+            print("unknown input")
+        if (position == 1):
+            row = 0
+            column = 0
+        elif (position == 2):
+            row = 0
+            column = 1
+        elif (position == 3):
+            row = 0
+            column = 2
+        elif (position == 4):
+            row = 1
+            column = 0
+        elif (position == 5):
+            row = 1
+            column = 1
+        elif (position == 6):
+            row = 1
+            column = 2
+        elif (position == 7):
+            row = 2
+            column = 0
+        elif (position == 8):
+            row = 2
+            column = 1
+        elif (position == 9):
+            row = 2
+            column = 2
+    board[row][column] = symbol
+    full.append(position)
+
+def check_win():
+    global win
+    if (board[0][0] == symbol and board[0][1] == symbol and board[0][2] == symbol):
+        win = True
+    if (board[1][0] == symbol and board[1][1] == symbol and board[1][2] == symbol):
+        win = True
+    if (board[2][0] == symbol and board[2][1] == symbol and board[2][2] == symbol):
+        win = True
+    if (board[0][0] == symbol and board[1][0] == symbol and board[2][0] == symbol):
+        win = True
+    if (board[0][1] == symbol and board[2][1] == symbol and board[2][1] == symbol):
+        win = True
+    if (board[0][2] == symbol and board[2][2] == symbol and board[2][2] == symbol):
+        win = True
+    if (board[0][0] == symbol and board[1][1] == symbol and board[2][2] == symbol):
+        win = True
+    if (board[0][2] == symbol and board[1][1] == symbol and board[2][0] == symbol):
+        win = True
+        
+win = False
+while (win == False):
+    turn += 1
+    if (turn % 2) == 0:
+        symbol = "(X)"
+    if (turn % 2) == 1.:
+        symbol = "(O)"
+    print_board()
+    make_move()
+    check_win()
+
+if (win == True):
+    print ("you win!!!")
+
